@@ -1,0 +1,76 @@
+
+body {
+  background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
+  min-height: 100vh;
+}
+
+.App {
+  text-align: center;
+  color: #1a237e;
+}
+
+.navbar {
+  background: linear-gradient(90deg, #1a237e 0%, #3949ab 100%);
+  box-shadow: 0 2px 8px rgba(26,35,126,0.1);
+}
+.navbar-brand, .navbar-nav .nav-link {
+  color: #fff !important;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+.navbar-brand img {
+  height: 40px;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+.navbar-nav .nav-link.active, .navbar-nav .nav-link:hover {
+  color: #ffb300 !important;
+}
+
+h1, h2, h3, h4, h5 {
+  color: #3949ab;
+  font-weight: 700;
+}
+
+a {
+  color: #1a237e;
+  text-decoration: underline;
+}
+a:hover {
+  color: #ffb300;
+}
+
+table {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(26,35,126,0.08);
+  margin: 20px auto;
+  width: 90%;
+}
+th {
+  background: #3949ab;
+  color: #fff;
+}
+td {
+  color: #1a237e;
+}
+
+button, .btn {
+  background: linear-gradient(90deg, #3949ab 0%, #1a237e 100%);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+button:hover, .btn:hover {
+  background: linear-gradient(90deg, #ffb300 0%, #f57c00 100%);
+  color: #fff;
+}
+
+.octofit-logo {
+  height: 40px;
+  margin-right: 12px;
+  vertical-align: middle;
+}
