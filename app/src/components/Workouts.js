@@ -12,7 +12,7 @@ const Workouts = () => {
       .then(json => {
         console.log('Workouts API endpoint:', endpoint);
         console.log('Fetched data:', json);
-        setData(json.results || json);
+        setData(Array.isArray(json) ? json : (json.results || []));
       })
       .catch(err => console.error('Error fetching workouts:', err));
   }, [endpoint]);
@@ -21,41 +21,51 @@ const Workouts = () => {
 
   return (
     <div>
-      <h2 className="mb-4 display-5">Workouts</h2>
-      <div className="mb-3">
-        <button className="btn btn-primary" onClick={() => setShowModal(true)}>Show Info Modal</button>
+      <div className="d-flex justify-content-between align-items-center mb-4">
+        <h2 className="display-5 fw-bold text-primary">Workouts</h2>
+        <button className="btn btn-outline-primary" onClick={() => setShowModal(true)}>
+          <i className="bi bi-info-circle me-2"></i>Show Info
+        </button>
       </div>
-      <div className="card mb-4">
+      <div className="card shadow-sm mb-4">
         <div className="card-body">
           <h5 className="card-title">Workouts Overview</h5>
           <p className="card-text">This section displays all workouts from the Octofit backend API.</p>
         </div>
       </div>
-      <div className="table-responsive">
-        <table className="table table-striped table-bordered">
-          <thead className="thead-dark">
-            <tr>
-              {headers.map(h => <th key={h}>{h}</th>)}
-            </tr>
-          </thead>
-          <tbody>
-            {data.map((item, idx) => (
-              <tr key={item.id || idx}>
-                {headers.map(h => <td key={h}>{item[h]?.toString()}</td>)}
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <div className="card shadow-sm">
+        <div className="card-body">
+          <div className="table-responsive">
+            <table className="table table-hover table-bordered align-middle">
+              <thead className="table-primary">
+                <tr>
+                  {headers.map(h => <th key={h} className="text-capitalize">{h}</th>)}
+                </tr>
+              </thead>
+              <tbody>
+                {data.length === 0 ? (
+                  <tr><td colSpan={headers.length} className="text-center">No workouts found.</td></tr>
+                ) : (
+                  data.map((item, idx) => (
+                    <tr key={item.id || idx}>
+                      {headers.map(h => <td key={h}>{item[h]?.toString()}</td>)}
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
 
       {/* Bootstrap Modal */}
       {showModal && (
-        <div className="modal show d-block" tabIndex="-1" role="dialog" style={{background: 'rgba(0,0,0,0.5)'}}>
+        <div className="modal fade show d-block" tabIndex="-1" role="dialog" style={{background: 'rgba(0,0,0,0.5)'}}>
           <div className="modal-dialog" role="document">
             <div className="modal-content">
-              <div className="modal-header">
+              <div className="modal-header bg-primary text-white">
                 <h5 className="modal-title">Workouts Info</h5>
-                <button type="button" className="close btn" onClick={() => setShowModal(false)}>&times;</button>
+                <button type="button" className="btn-close" aria-label="Close" onClick={() => setShowModal(false)}></button>
               </div>
               <div className="modal-body">
                 <p>This modal uses Bootstrap styles and can be used for more info or actions.</p>
